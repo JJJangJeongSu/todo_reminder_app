@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_reminder_app/models/daily_todo.dart';
+import 'package:todo_reminder_app/providers/daily_todo_provider.dart';
 
-class DailyTextField extends StatelessWidget {
-  const DailyTextField({
+class DailyTextField extends ConsumerWidget {
+  DailyTextField({
     super.key,
   });
 
+  final newTodoItemController = TextEditingController();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        controller: newTodoItemController,
         decoration: InputDecoration(
           hintText: "Add your Todo!",
           filled: true,
@@ -18,7 +24,14 @@ class DailyTextField extends StatelessWidget {
           contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           isDense: true,
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ref.read(todosProvider.notifier).add(
+                    DailyTodo(
+                      content: newTodoItemController.text,
+                      id: UniqueKey().toString(),
+                    ),
+                  );
+            },
             icon: const Icon(Icons.add),
           ),
         ),
