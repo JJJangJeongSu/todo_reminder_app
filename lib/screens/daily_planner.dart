@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_reminder_app/data/dummy_data.dart';
 import 'package:todo_reminder_app/providers/daily_todo_provider.dart';
-import 'package:todo_reminder_app/widgets/daily_text_field.dart';
-import 'package:todo_reminder_app/widgets/daily_todo_tile.dart';
-import 'package:todo_reminder_app/widgets/daily_todo_tiles.dart';
+import 'package:todo_reminder_app/widgets/daily_todo/adder_dialog.dart';
+import 'package:todo_reminder_app/widgets/planner_navigation_bar.dart';
+import 'package:todo_reminder_app/widgets/daily_todo/daily_text_field.dart';
+import 'package:todo_reminder_app/widgets/daily_todo/daily_todo_tiles.dart';
+import 'package:todo_reminder_app/widgets/daily_todo/daily_total.dart';
 
 class DailyPlanner extends ConsumerStatefulWidget {
   @override
@@ -22,19 +23,35 @@ class _DailyPlannerState extends ConsumerState<DailyPlanner> {
   Widget build(BuildContext context) {
     final todos = ref.watch(todosProvider);
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Daily Planner"),
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {}, icon: const Icon(Icons.chevron_left_sharp)),
+        title: Text(
+          "Daily Planner",
         ),
-        body: Stack(
-          children: [
-            DailyTodoTiles(),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: DailyTextField(),
-            )
-          ],
-        ));
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {}, icon: const Icon(Icons.chevron_right_sharp)),
+        ],
+      ),
+      body: Column(
+        children: [
+          DailyTotal(),
+          Expanded(child: DailyTodoTiles()),
+        ],
+      ),
+      bottomNavigationBar: PlannerNavigationBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AdderDialog();
+              });
+        },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

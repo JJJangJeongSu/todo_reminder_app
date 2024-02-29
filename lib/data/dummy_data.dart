@@ -7,3 +7,8 @@ final todos = [
   DailyTodo(content: "Do homework", id: UniqueKey().toString()),
   DailyTodo(content: "Buy food", id: UniqueKey().toString()),
 ];
+
+
+// 날짜 
+// 데이터
+

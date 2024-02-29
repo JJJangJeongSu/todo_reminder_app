@@ -21,10 +21,14 @@ class DailyTextField extends ConsumerWidget {
           filled: true,
           fillColor: Colors.blue,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           isDense: true,
           suffixIcon: IconButton(
             onPressed: () {
+              if (newTodoItemController.text.trim().isEmpty) {
+                return;
+              }
               ref.read(todosProvider.notifier).add(
                     DailyTodo(
                       content: newTodoItemController.text,
