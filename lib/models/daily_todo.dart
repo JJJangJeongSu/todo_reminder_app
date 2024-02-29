@@ -4,6 +4,7 @@ class DailyTodo {
       this.done = false,
       required this.id,
       this.timeCount = Duration.zero});
+
   String id;
   String content;
   bool done;

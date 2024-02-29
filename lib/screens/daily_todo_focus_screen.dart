@@ -17,36 +17,28 @@ class _DailyTodoFocusedScreenState
     extends ConsumerState<DailyTodoFocusedScreen> {
   @override
   Widget build(BuildContext context) {
-    final todo = ref
+    final currentTodo = ref
         .watch(todosProvider)
         .firstWhere((item) => item.id == widget.todo.id);
 
-    print(todo.content);
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.todo.content),
+        title: Text(currentTodo.content),
       ),
       body: Column(
         children: [
           // 타이머 상태를 표시하는 Text 위젯
           Text(
-            "todo.timeCount.toString()",
+            currentTodo.timeCount.toString(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // 타이머 시작 버튼
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('시작'),
-              ),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
               SizedBox(width: 8),
               // 타이머 일시 중지 버튼
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('일시 중지'),
-              ),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.pause)),
             ],
           ),
         ],

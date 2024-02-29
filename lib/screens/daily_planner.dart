@@ -21,12 +21,12 @@ class _DailyPlannerState extends ConsumerState<DailyPlanner> {
 
   @override
   Widget build(BuildContext context) {
-    final todos = ref.watch(todosProvider);
+    // final todos = ref.watch(todosProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {}, icon: const Icon(Icons.chevron_left_sharp)),
-        title: Text(
+        title: const Text(
           "Daily Planner",
         ),
         centerTitle: true,
