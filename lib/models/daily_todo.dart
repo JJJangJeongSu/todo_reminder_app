@@ -10,6 +10,10 @@ class DailyTodo {
   bool done;
   Duration timeCount;
 
+  String get formattedTimeCount {
+    return timeCount.toString().split('.').first.padLeft(8, "0");
+  }
+
   DailyTodo copyWith({
     String? id,
     String? content,

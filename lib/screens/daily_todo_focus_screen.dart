@@ -29,16 +29,28 @@ class _DailyTodoFocusedScreenState
         children: [
           // 타이머 상태를 표시하는 Text 위젯
           Text(
-            currentTodo.timeCount.toString(),
+            currentTodo.formattedTimeCount,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // 타이머 시작 버튼
-              IconButton(onPressed: () {}, icon: const Icon(Icons.play_arrow)),
+              IconButton(
+                onPressed: () {
+                  ref
+                      .watch(todosProvider.notifier)
+                      .startTimeCount(currentTodo.id);
+                },
+                icon: const Icon(Icons.play_arrow),
+                iconSize: 50,
+              ),
               SizedBox(width: 8),
-              // 타이머 일시 중지 버튼
-              IconButton(onPressed: () {}, icon: const Icon(Icons.pause)),
+              IconButton(
+                  onPressed: () {
+                    ref.watch(todosProvider.notifier).pauseTimeCount();
+                  },
+                  icon: const Icon(Icons.pause)),
             ],
           ),
         ],
